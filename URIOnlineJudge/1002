@@ -20,7 +20,7 @@ int main()
     float n = 3.14159;
     float r = 0;
     
-    scanf("%f", &r);
+    scanf("%.4f", &r);
     
     printf("A=%f\n", n * pow(r,2));
     return 0;
