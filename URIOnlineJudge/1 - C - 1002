@@ -17,11 +17,12 @@
 
 int main()
 {
-    float n = 3.14159;
-    float r = 0;
+    double n = 3.14159;
+    double r = 0;
     
-    scanf("%.4f", &r);
+    scanf("%lf", &r);
     
-    printf("A=%f\n", n * pow(r,2));
+    printf("A=%.4lf\n", n * pow(r,2));
     return 0;
 }
+
