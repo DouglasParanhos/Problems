@@ -25,6 +25,6 @@ int main()
     scanf("%lf", &c);
     
     printf("NUMBER = %d\n", a);
-	printf("SALARY = U$ %.2lf", b*c);
+	printf("SALARY = U$ %.2lf\n", b*c);
     return 0;
 }
