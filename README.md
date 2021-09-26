@@ -4,3 +4,4 @@ Languages used so far:
 - C
 - Golang
 - Python
+- SQL
