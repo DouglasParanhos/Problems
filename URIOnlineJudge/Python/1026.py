@@ -21,41 +21,14 @@ For each input line, the program must provide an output's line: the value after 
 url: https://www.urionlinejudge.com.br/judge/en/problems/view/1026
 Id: 1026
 Difficulty: 5'''
-sizeNumberDecimal = 32
 
-def convertDeconvertToDecimal(number, convert = True):
-    if convert:
-        return bin(number)
-    else:
-        return int(number, 2)
-
+# Comment of author: Previously I made a very complicated solution, until i realized it's just XOR it's required
 while True:
-    numbers = str(input())
-    if numbers is None:
+    try:
+        numbers = str(input())
+    except EOFError:
         break
-
-    arrayNumbers = numbers.split(" ")
-    number1BinaryString = convertDeconvertToDecimal(int(arrayNumbers[0]))[2:]
-    number2BinaryString = convertDeconvertToDecimal(int(arrayNumbers[1]))[2:]
-
-    finalNumber = [0]*sizeNumberDecimal
-
-    for i in range(-1, (sizeNumberDecimal * -1), -1):
-
-        digit1 = digit2 = 0
-        
-        try:
-            digit1 = int(number1BinaryString[i])
-        except:
-            pass
-
-        try:
-            digit2 = int(number2BinaryString[i])
-        except:
-            pass
-
-        if digit1 == 1 ^ digit2 == 1:
-            finalNumber[i] = 1
     
-    print(convertDeconvertToDecimal(''.join(str(i) for i in finalNumber), False))
-    break
+    arrayNumbers = numbers.split(" ")
+
+    print(int(arrayNumbers[0]) ^ int(arrayNumbers[1]))
