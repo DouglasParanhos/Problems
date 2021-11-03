@@ -2,9 +2,16 @@
 // Difficulty: Medium
 
 /**
+* Problem:
+*
 * You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
 *
 * You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+*/
+
+/**
+* Runtime: 2 ms, faster than 74.02% of Java online submissions for Add Two Numbers.
+* Memory Usage: 39.3 MB, less than 76.69% of Java online submissions for Add Two Numbers.
 */
 
 /**
@@ -75,8 +82,3 @@ class Solution {
         return result;
     }
 }
-
-/**
-* Runtime: 2 ms, faster than 74.02% of Java online submissions for Add Two Numbers.
-* Memory Usage: 39.3 MB, less than 76.69% of Java online submissions for Add Two Numbers.
-*/
