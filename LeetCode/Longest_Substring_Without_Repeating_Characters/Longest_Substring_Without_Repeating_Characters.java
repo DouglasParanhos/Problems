@@ -1,3 +1,17 @@
+// Url: https://leetcode.com/problems/longest-substring-without-repeating-characters/submissions/
+// Difficulty: Medium
+
+/**
+* Problem:
+*
+* Given a string s, find the length of the longest substring without repeating characters.
+*/
+
+/** 
+* Runtime: 159 ms, faster than 10.64% of Java online submissions for Longest Substring Without Repeating Characters.
+* Memory Usage: 39.9 MB, less than 45.56% of Java online submissions for Longest Substring Without Repeating Characters.
+*/
+
 import java.util.HashSet;
 
 class Solution {
