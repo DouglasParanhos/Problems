@@ -45,6 +45,7 @@ To do this, count the number of times a depth measurement increases from the pre
 In this example, there are 7 measurements that are larger than the previous measurement.
 
 How many measurements are larger than the previous measurement?
+R: 1292
 '''
 
 firstLine = True
