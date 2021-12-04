@@ -35,17 +35,13 @@ Calculate the horizontal position and depth you would have after following the p
 R: 2019945
 '''
 
-horizontal = 0
-vertical = 0
+horizontal, vertical = 0, 0
 
 #Python has no switch case :'(
 def decideDirection(instructions):
 
     global horizontal
     global vertical
-
-
-    print(instructions)
     
     if instructions[0] == 'forward':
         horizontal += int(instructions[1])
