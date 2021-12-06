@@ -62,6 +62,8 @@ import tracemalloc
 start_time = time.time()
 tracemalloc.start()
 
+#####################################################################
+
 lanternfishes = []
 
 class lanternfish():
@@ -103,6 +105,8 @@ else:
         totalZeros = getTotalZeros()
 
 print(len(lanternfishes))
+
+#####################################################################
 
 print("--- %s miliseconds ---" % ((time.time() - start_time)*1000))
 print("--- %s MB used ---" % (tracemalloc.get_traced_memory()[1]/1000000))

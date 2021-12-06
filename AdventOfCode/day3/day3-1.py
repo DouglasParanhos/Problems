@@ -42,6 +42,8 @@ import tracemalloc
 start_time = time.time()
 tracemalloc.start()
 
+#####################################################################
+
 bits = {}
 gamma = ''
 epsilon = ''
@@ -87,6 +89,8 @@ for line in f:
 getGammaEpsilon()
 
 print (int(gamma, 2) * int(epsilon, 2))
+
+#####################################################################
 
 print("--- %s miliseconds ---" % ((time.time() - start_time)*1000))
 print("--- %s MB used ---" % (tracemalloc.get_traced_memory()[1]/1000000))

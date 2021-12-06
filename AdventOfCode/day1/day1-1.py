@@ -53,6 +53,8 @@ import tracemalloc
 start_time = time.time()
 tracemalloc.start()
 
+#####################################################################
+
 firstLine = True
 depthIncreases = 0
 actualNum, previousNum = 0, 0 # any number here is fine, it will be overriden on first iteration
@@ -73,6 +75,8 @@ for line in f:
         depthIncreases = depthIncreases + 1
         
 print(depthIncreases)
+
+#####################################################################
 
 print("--- %s miliseconds ---" % ((time.time() - start_time)*1000))
 print("--- %s MB used ---" % (tracemalloc.get_traced_memory()[1]/1000000))

@@ -34,6 +34,8 @@ import tracemalloc
 start_time = time.time()
 tracemalloc.start()
 
+#####################################################################
+
 horizontal, vertical, aim = 0, 0, 0
 
 #Python has no switch case :'(
@@ -63,6 +65,8 @@ for line in f:
     decideDirection(instructions)
 
 print (horizontal * vertical)
+
+#####################################################################
 
 print("--- %s miliseconds ---" % ((time.time() - start_time)*1000))
 print("--- %s MB used ---" % (tracemalloc.get_traced_memory()[1]/1000000))

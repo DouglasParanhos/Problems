@@ -37,12 +37,14 @@ Consider sums of a three-measurement sliding window. How many sums are larger th
 R: 1262
 '''
 
-import queue
 import time
 import tracemalloc
 
 start_time = time.time()
 tracemalloc.start()
+#####################################################################
+
+import queue
 
 q1 = queue.Queue(3)
 previousSum = 0
@@ -86,6 +88,8 @@ for line in f:
         q1.put(actualNum)
 
 print(depthIncreases)
+
+#####################################################################
 
 print("--- %s miliseconds ---" % ((time.time() - start_time)*1000))
 print("--- %s MB used ---" % (tracemalloc.get_traced_memory()[1]/1000000))
