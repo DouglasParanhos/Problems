@@ -47,6 +47,11 @@ In this example, there are 7 measurements that are larger than the previous meas
 How many measurements are larger than the previous measurement?
 R: 1292
 '''
+import time
+import tracemalloc
+
+start_time = time.time()
+tracemalloc.start()
 
 firstLine = True
 depthIncreases = 0
@@ -68,4 +73,8 @@ for line in f:
         depthIncreases = depthIncreases + 1
         
 print(depthIncreases)
-        
+
+print("--- %s miliseconds ---" % ((time.time() - start_time)*1000))
+print("--- %s MB used ---" % (tracemalloc.get_traced_memory()[1]/1000000))
+
+tracemalloc.stop()

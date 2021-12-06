@@ -41,10 +41,15 @@ In this diagram, the top left corner is 0,0 and the bottom right corner is 9,9. 
 To avoid the most dangerous areas, you need to determine the number of points where at least two lines overlap. In the above example, this is anywhere in the diagram with a 2 or larger - a total of 5 points.
 
 Consider only horizontal and vertical lines. At how many points do at least two lines overlap?
-
+R: 5698
 '''
 
 import numpy as np
+import time
+import tracemalloc
+
+start_time = time.time()
+tracemalloc.start()
 
 winds = np.zeros(shape=(1000,1000))
 
@@ -83,3 +88,8 @@ for line in f:
 
 else:
     print(getOverlaps())
+
+print("--- %s miliseconds ---" % ((time.time() - start_time)*1000))
+print("--- %s MB used ---" % (tracemalloc.get_traced_memory()[1]/1000000))
+
+tracemalloc.stop()

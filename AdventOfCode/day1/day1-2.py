@@ -34,9 +34,15 @@ H: 792 (increased)
 In this example, there are 5 sums that are larger than the previous sum.
 
 Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
+R: 1262
 '''
 
 import queue
+import time
+import tracemalloc
+
+start_time = time.time()
+tracemalloc.start()
 
 q1 = queue.Queue(3)
 previousSum = 0
@@ -80,4 +86,8 @@ for line in f:
         q1.put(actualNum)
 
 print(depthIncreases)
-        
+
+print("--- %s miliseconds ---" % ((time.time() - start_time)*1000))
+print("--- %s MB used ---" % (tracemalloc.get_traced_memory()[1]/1000000))
+
+tracemalloc.stop()

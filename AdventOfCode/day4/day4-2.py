@@ -11,6 +11,12 @@ Figure out which board will win last. Once it wins, what would its final score b
 R: 7075
 '''
 
+import time
+import tracemalloc
+
+start_time = time.time()
+tracemalloc.start()
+
 boards = []
 numbers = []
 MATRIX_SIZE = 5 #it's squared, we need only one value
@@ -121,3 +127,9 @@ for line in f:
 
 else:
     print(startDrawn())
+
+
+print("--- %s miliseconds ---" % ((time.time() - start_time)*1000))
+print("--- %s MB used ---" % (tracemalloc.get_traced_memory()[1]/1000000))
+
+tracemalloc.stop()

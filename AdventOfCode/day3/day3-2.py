@@ -36,6 +36,12 @@ Use the binary numbers in your diagnostic report to calculate the oxygen generat
 R: 4105235
 '''
 
+import time
+import tracemalloc
+
+start_time = time.time()
+tracemalloc.start()
+
 bits = []
 o2rating = ''
 co2rating = ''
@@ -82,7 +88,10 @@ for line in f:
 o2rating = getRating(bits, 0, 'o2', '')
 co2rating = getRating(bits, 0, 'co2', '')
 
-print(o2rating)
-print(co2rating)
-
 print (int(o2rating, 2) * int(co2rating, 2))
+
+
+print("--- %s miliseconds ---" % ((time.time() - start_time)*1000))
+print("--- %s MB used ---" % (tracemalloc.get_traced_memory()[1]/1000000))
+
+tracemalloc.stop()
