@@ -110,9 +110,6 @@ def decodeFinalNumber(possibleLettersPerSegment, digits):
                 finalNumber += str(translationDigitSegment[''.join(list(permut))])
             except KeyError:
                 continue
-
-    if finalNumber == '':
-        print(digits)
     
     return int(finalNumber)
 
