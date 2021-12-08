@@ -103,13 +103,9 @@ def decodeFinalNumber(possibleLettersPerSegment, digits):
     }
 
     for number in digits.split(" "):
-        digits = str(decodeSingleDigit(possibleLettersPerSegment, number))
+        digits = sorted(str(decodeSingleDigit(possibleLettersPerSegment, number)))
 
-        for permut in list(it.permutations(digits)):
-            try:
-                finalNumber += str(translationDigitSegment[''.join(list(permut))])
-            except KeyError:
-                continue
+        finalNumber += str(translationDigitSegment["".join(digits)])
     
     return int(finalNumber)
 
