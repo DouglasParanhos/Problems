@@ -176,7 +176,6 @@ def decode(parts):
     return decodeFinalNumber({v: k for k, v in possibleLettersPerSegment.items()}, parts[1])
 
 sum = 0
-contador = 0
 f = open("lights.txt", "r")
 for line in f:
     line = line.replace("\n","")
@@ -185,7 +184,6 @@ for line in f:
         continue
 
     part = line.split(" | ")
-    contador += 1
     sum += decode(part)
 
 else:
