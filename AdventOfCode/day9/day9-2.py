@@ -105,7 +105,7 @@ def getLowPoints():
             if isLowPoint(i,j):
                 lowPoints.append([i,j])
 
-def getPointsSubBasin(x, y, x0, y1):
+def getPointsSubBasin(x, y):
     global smokeMap
     global size
 
@@ -115,50 +115,23 @@ def getPointsSubBasin(x, y, x0, y1):
 
     if exist(x - 1, y) and \
        smokeMap[x - 1][y] != 9 and \
-       smokeMap[x - 1][y] != -1 and \
-       (x - 1 != x0 or y != y1):
-        #print("oi1")
-        getPointsSubBasin(x - 1, y, x, y)
+       smokeMap[x - 1][y] != -1:
+        getPointsSubBasin(x - 1, y)
     
     if exist(x + 1, y) and \
        smokeMap[x + 1][y] != 9 and \
-       smokeMap[x + 1][y] != -1 and \
-       (x + 1 != x0 or y != y1):
-        #print("oi2")
-        getPointsSubBasin(x + 1, y, x, y)
+       smokeMap[x + 1][y] != -1:
+        getPointsSubBasin(x + 1, y)
     
     if exist(x, y - 1) and \
        smokeMap[x][y - 1] != 9 and \
-       smokeMap[x][y - 1] != -1 and \
-       (x != x0 or y - 1 != y1):
-        #print("oi3")
-        getPointsSubBasin(x, y - 1, x, y)
+       smokeMap[x][y - 1] != -1:
+        getPointsSubBasin(x, y - 1)
 
     if exist(x, y + 1) and \
        smokeMap[x][y + 1] != 9 and \
-       smokeMap[x][y + 1] != -1 and \
-       (x != x0 or y + 1 != y1):
-        #print("oi4")
-        getPointsSubBasin(x, y + 1, x, y)
-
-def startSearching(x, y):
-    global smokeMap
-    global size
-
-    smokeMap[x][y] = -1
-    size = 1
-
-    if exist(x - 1, y) and smokeMap[x - 1][y] != 9:
-        getPointsSubBasin(x - 1, y, x, y)
-    
-    if exist(x + 1, y) and smokeMap[x + 1][y] != 9:
-        getPointsSubBasin(x + 1, y, x, y)
-    
-    if exist(x, y - 1) and smokeMap[x][y - 1] != 9:
-        getPointsSubBasin(x, y - 1, x, y)
-
-    if exist(x, y + 1) and smokeMap[x][y + 1] != 9:
-        getPointsSubBasin(x, y + 1, x, y)
+       smokeMap[x][y + 1] != -1:
+        getPointsSubBasin(x, y + 1)
 
 def maxBasinsSizes():
 
@@ -170,7 +143,7 @@ def maxBasinsSizes():
 
     for lowPoint in lowPoints:
         size = 0
-        startSearching(lowPoint[0], lowPoint[1])
+        getPointsSubBasin(lowPoint[0], lowPoint[1])
         basinsSizes.append(size)
 
     return sorted(basinsSizes)[-3:]
