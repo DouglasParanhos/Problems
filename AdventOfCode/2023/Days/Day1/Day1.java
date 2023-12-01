@@ -12,6 +12,6 @@ public final class Day1 extends Day {
 
     public String exec(){
 
-        return this.inputFile.get(0);
+        return this.inputLines.get(0);
     }
 }

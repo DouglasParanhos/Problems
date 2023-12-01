@@ -7,16 +7,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Day {
 
-    protected List<String> inputFile;
+    protected List<String> inputLines;
 
     public abstract String exec();
 
     public void getInput(String path) {
         try {
-            this.inputFile = Files.readAllLines(Paths.get(getClass().getResource(path).toURI()));
+            this.inputLines = Files.readAllLines(Paths.get(Objects.requireNonNull(getClass().getResource(path)).toURI()));
         } catch (IOException e) {
             System.out.println("Couldn't read file in path: " + path);
         } catch (URISyntaxException e) {
