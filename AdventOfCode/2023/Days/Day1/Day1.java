@@ -24,9 +24,6 @@ public final class Day1 extends Day {
     }
 
     private int getNumberFromLineImproved(String line) {
-        if(line.equals("8sevenonefmfqhtx8lk")) {
-            System.out.println("erro");
-        }
         List<String> chars = List.of(line.split(""));
         String firstInt = "", lastInt = "";
         for (int i = 0; i < chars.size(); i++) {
