@@ -1,10 +1,8 @@
 package Days;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +11,9 @@ public abstract class Day {
 
     protected List<String> inputLines;
 
-    public abstract String exec();
+    public abstract String execPart1();
+
+    public abstract String execPart2();
 
     public void getInput(String path) {
         try {
