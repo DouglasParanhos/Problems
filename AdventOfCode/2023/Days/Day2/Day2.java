@@ -2,10 +2,7 @@ package Days.Day2;
 
 import Days.Day;
 
-import java.sql.SQLOutput;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
