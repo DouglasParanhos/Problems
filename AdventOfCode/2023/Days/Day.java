@@ -11,6 +11,10 @@ public abstract class Day {
 
     protected List<String> inputLines;
 
+    public Day(int day) {
+        getInput("day" + day +".txt");
+    }
+
     public abstract String execPart1();
 
     public abstract String execPart2();

@@ -10,10 +10,10 @@ import java.util.stream.Stream;
 public final class Day1 extends Day {
 
     public Day1() {
-        super();
-        getInput("day1.txt");
+        super(1);
     }
 
+    @Override
     public String execPart1(){
         int sum = 0;
         for(String line: this.inputLines) {
@@ -23,6 +23,7 @@ public final class Day1 extends Day {
         return String.valueOf(sum);
     }
 
+    @Override
     public String execPart2() {
         int sum = 0;
         for(String line: this.inputLines) {
