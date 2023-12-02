@@ -14,6 +14,15 @@ public final class Day1 extends Day {
         getInput("day1.txt");
     }
 
+    public String execPart1(){
+        int sum = 0;
+        for(String line: this.inputLines) {
+            sum += getNumberFromLine(line);
+        }
+
+        return String.valueOf(sum);
+    }
+
     public String execPart2() {
         int sum = 0;
         for(String line: this.inputLines) {
@@ -107,15 +116,6 @@ public final class Day1 extends Day {
         }
 
         return numberString;
-    }
-
-    public String execPart1(){
-        int sum = 0;
-        for(String line: this.inputLines) {
-            sum += getNumberFromLine(line);
-        }
-
-        return String.valueOf(sum);
     }
 
     private int getNumberFromLine(String line) {
