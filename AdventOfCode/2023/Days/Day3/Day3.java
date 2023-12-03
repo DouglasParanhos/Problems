@@ -2,6 +2,8 @@ package Days.Day3;
 
 import Days.Day;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Day3 extends Day {
@@ -11,6 +13,14 @@ public class Day3 extends Day {
     public Day3() {
         super(3);
         convertInputToMatrix();
+    }
+
+    private void convertInputToMatrix() {
+
+        for(int i = 0; i < inputLines.size(); i++) {
+            String[] s = inputLines.get(i).split("");
+            System.arraycopy(s, 0, matrix[i], 0, s.length);
+        }
     }
 
     @Override
@@ -75,14 +85,58 @@ public class Day3 extends Day {
 
     @Override
     public String execPart2() {
-        return null;
-    }
-
-    private void convertInputToMatrix() {
-
-        for(int i = 0; i < inputLines.size(); i++) {
-            String[] s = inputLines.get(i).split("");
-            System.arraycopy(s, 0, matrix[i], 0, s.length);
+        int sum = 0;
+        for(int i = 0; i < matrix.length; i++) {
+            for(int j = 0; j < matrix[i].length; j++) {
+                sum += Objects.equals(matrix[i][j], "*") ? getSumGears(i, j): 0;
+            }
         }
+
+        return sum + "";
     }
+
+    private int getSumGears(int x, int y) {
+        int lineBegin = Math.max(x - 1, 0);
+        int lineEnd = Math.min(x + 1, matrix[x].length - 1);
+        int columnBegin = Math.max(y - 1, 0);
+        int columnEnd = Math.min(y + 1, matrix[y].length - 1);
+
+        List<Integer> numbers = new ArrayList<>();
+        for(int i = lineBegin; i <= lineEnd; i++) {
+            for(int j = columnBegin; j <= columnEnd; j++) {
+                if(isNumeric(matrix[i][j])) {
+                    System.out.println("getSumGears: " + "i: " + i + ", j: " + j + ", number: " + matrix[i][j]);
+                    ExtractedNumber element = extractNumber(i, j);
+                    numbers.add(element.number());
+                    j = element.xEnd();
+                }
+            }
+        }
+
+        return numbers.size() == 2 ? numbers.get(0) * numbers.get(1) : 0;
+    }
+
+    private ExtractedNumber extractNumber(int i, int j) {
+        StringBuilder number = new StringBuilder();
+
+        int beginIndex = -1;
+        int index = -1;
+
+        // get number initial digit
+        while(j >= 0  && isNumeric(matrix[i][j])) {
+            beginIndex = j;
+            index = j;
+            j--;
+        }
+
+        while(j < matrix[i].length && isNumeric(matrix[i][index])) {
+            number.append(matrix[i][index]);
+            index++;
+        }
+
+        return new ExtractedNumber(beginIndex, index, Integer.parseInt(number.toString()));
+    }
+
+    private record ExtractedNumber(int xBegin, int xEnd, int number) {}
+
 }
