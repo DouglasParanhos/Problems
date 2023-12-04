@@ -14,23 +14,23 @@ public final class Day1 extends Day {
     }
 
     @Override
-    public String execPart1(){
+    public Integer execPart1(){
         int sum = 0;
         for(String line: this.inputLines) {
             sum += getNumberFromLine(line);
         }
 
-        return String.valueOf(sum);
+        return sum;
     }
 
     @Override
-    public String execPart2() {
+    public Integer execPart2() {
         int sum = 0;
         for(String line: this.inputLines) {
             sum += getNumberFromLineImproved(line);
         }
 
-        return String.valueOf(sum);
+        return sum;
     }
 
     private int getNumberFromLineImproved(String line) {
@@ -38,7 +38,7 @@ public final class Day1 extends Day {
         String firstInt = "", lastInt = "";
         for (int i = 0; i < chars.size(); i++) {
             String aChar = chars.get(i);
-            String number = "";
+            String number;
             if (isNumeric(aChar)) {
                 number = aChar;
             } else {

@@ -13,7 +13,7 @@ public class Day2 extends Day {
         super(2);
     }
     @Override
-    public String execPart1() {
+    public Integer execPart1() {
         int sum = 0;
 
         for(String game: this.inputLines) {
@@ -25,7 +25,7 @@ public class Day2 extends Day {
             }
         }
 
-        return sum + "";
+        return sum;
     }
 
     private boolean gameIsPossible(String[] sets) {
@@ -57,7 +57,7 @@ public class Day2 extends Day {
     }
 
     @Override
-    public String execPart2() {
+    public Integer execPart2() {
         int sum = 0;
 
         for(String game: this.inputLines) {
@@ -66,7 +66,7 @@ public class Day2 extends Day {
             sum += getMinimumValue(parts[1].split(";"));
         }
 
-        return sum + "";
+        return sum;
     }
 
     private int getMinimumValue(String[] sets) {

@@ -24,7 +24,7 @@ public class Day3 extends Day {
     }
 
     @Override
-    public String execPart1() {
+    public Integer execPart1() {
         int sum = 0;
         for(int i = 0; i < matrix.length; i++) {
             for(int j = 0; j < matrix[i].length; j++) {
@@ -37,7 +37,7 @@ public class Day3 extends Day {
                 }
             }
         }
-        return sum + "";
+        return sum;
     }
 
     private static String getNumber(int i, int j) {
@@ -84,7 +84,7 @@ public class Day3 extends Day {
     }
 
     @Override
-    public String execPart2() {
+    public Integer execPart2() {
         int sum = 0;
         for(int i = 0; i < matrix.length; i++) {
             for(int j = 0; j < matrix[i].length; j++) {
@@ -92,7 +92,7 @@ public class Day3 extends Day {
             }
         }
 
-        return sum + "";
+        return sum;
     }
 
     private int getSumGears(int x, int y) {

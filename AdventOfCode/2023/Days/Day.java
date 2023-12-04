@@ -15,9 +15,9 @@ public abstract class Day {
         getInput("day" + day +".txt");
     }
 
-    public abstract String execPart1();
+    public abstract Number execPart1();
 
-    public abstract String execPart2();
+    public abstract Number execPart2();
 
     public void getInput(String path) {
         try {
