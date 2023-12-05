@@ -60,11 +60,7 @@ public class Day5 extends Day {
         }
     }
 
-    @Override
-    public Number execPart1() {
-        List<Long> locations = new ArrayList<>();
-        for(Long l: seeds) {
-            Long translation = l;
+    private Long getMinPosition(Long minSeed, Long translation) {
             for(String mapName: getPath()) {
                 List<Conversion> translationList = conversionLists.get(mapName);
                 for(Conversion c: translationList) {
@@ -74,15 +70,36 @@ public class Day5 extends Day {
                     }
                 }
             }
-            locations.add(translation);
-        }
 
-        return locations.stream().mapToLong(v -> v).min().getAsLong();
+            if(minSeed < 0) {
+                return translation;
+            }
+
+            return Math.min(minSeed, translation);
+
+    }
+
+    @Override
+    public Number execPart1() {
+        Long minSeed = -1L;
+        for(Long l: seeds) {
+            minSeed = getMinPosition(minSeed, l);
+        }
+        return minSeed;
     }
 
     @Override
     public Number execPart2() {
-        return null;
+        Long minSeed = -1L;
+        for(int i = 0; i <seeds.size(); i += 2) {
+            Long value = seeds.get(i);
+            while(value < seeds.get(i) + seeds.get(i + 1) ) {
+                minSeed = getMinPosition(minSeed, value);
+                value++;
+            }
+
+        }
+        return minSeed;
     }
 
     private record Conversion(long source, long destination, long range) {}
