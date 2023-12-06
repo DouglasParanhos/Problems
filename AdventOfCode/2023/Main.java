@@ -8,6 +8,6 @@ import Days.Day6.Day6;
 public class Main {
 
     public static void main(String... args) {
-        System.out.println(new Day6().execPart1());
+        System.out.println(new Day6().execPart2());
     }
 }

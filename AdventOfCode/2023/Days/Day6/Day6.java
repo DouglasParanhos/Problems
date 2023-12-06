@@ -3,31 +3,33 @@ package Days.Day6;
 import Days.Day;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 public class Day6 extends Day {
 
+    List<String> timeSplit;
+    List<String> distanceSplit;
+
     public Day6() {
         super(6);
+        timeSplit = Arrays.stream(this.inputLines.get(0).split(" ")).filter(item -> !item.isEmpty()).toList();
+        distanceSplit = Arrays.stream(this.inputLines.get(1).split(" ")).filter(item -> !item.isEmpty()).toList();
     }
 
     @Override
     public Number execPart1() {
-        int product = 1;
-        List<String> timeSplit = Arrays.stream(this.inputLines.get(0).split(" ")).filter( item -> !item.isEmpty()).toList();
-        List<String> distanceSplit = Arrays.stream(this.inputLines.get(1).split(" ")).filter( item -> !item.isEmpty()).toList();
+        long product = 1;
 
         for(int i = 1; i < timeSplit.size(); i++) {
-            product *= getPossibleWaysToWin(Integer.parseInt(timeSplit.get(i)), Integer.parseInt(distanceSplit.get(i)));
+            product *= getPossibleWaysToWin(Long.parseLong(timeSplit.get(i)), Long.parseLong(distanceSplit.get(i)));
         }
 
         return product;
     }
 
-    private int getPossibleWaysToWin(int time, int distance) {
-        int count = 0;
-        for(int i = 0; i < time; i++) {
+    private long getPossibleWaysToWin(long time, long distance) {
+        long count = 0;
+        for(long i = 0; i < time; i++) {
             if(((time - i) * i) > distance) {
                 count++;
             }
@@ -38,6 +40,14 @@ public class Day6 extends Day {
 
     @Override
     public Number execPart2() {
-        return null;
+        StringBuilder time = new StringBuilder();
+        StringBuilder distance = new StringBuilder();
+
+        for(int i = 1; i < timeSplit.size(); i++) {
+            time.append(timeSplit.get(i));
+            distance.append(distanceSplit.get(i));
+        }
+
+        return getPossibleWaysToWin(Long.parseLong(time.toString()), Long.parseLong(distance.toString()));
     }
 }
