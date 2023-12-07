@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Day7 extends Day {
 
@@ -13,29 +14,41 @@ public class Day7 extends Day {
 
     public Day7() {
         super(7);
+    }
+
+    private void fillHands(boolean maxValue) {
         this.inputLines.forEach(line -> {
             String[] parts = line.split(" ");
-            hands.add(new Hand(parts[0], Integer.parseInt(parts[1])));
+            hands.add(new Hand(parts[0], Integer.parseInt(parts[1]), maxValue));
         });
     }
 
-    @Override
-    public Number execPart1() {
+    private Number getSum(){
         Collections.sort(hands);
         long sum = 0L;
         System.out.println(hands);
         for(int i=0; i<hands.size(); i++) {
+            System.out.println("hand:" + hands.get(i).cards + ", bid:" + hands.get(i).bid + ", type: " + hands.get(i).setType() + ", i: " + (i+1) + ", value_sum: " + (hands.get(i).bid * (i + 1)) + ", cumulative:" + sum);
             sum += ((long) hands.get(i).bid * (i + 1));
         }
         return sum;
     }
 
     @Override
+    public Number execPart1() {
+        fillHands(false);
+        return getSum();
+    }
+
+    @Override
     public Number execPart2() {
-        return null;
+        fillHands(true);
+        return getSum();
     }
 
     private static class Hand implements Comparable<Hand>{
+
+        private static boolean maxValue;
 
         private final String cards;
 
@@ -43,9 +56,10 @@ public class Day7 extends Day {
 
         private final TYPE_HAND type;
 
-        private Hand(String cards, int bid) {
+        private Hand(String cards, int bid, boolean max) {
             this.cards = cards;
             this.bid = bid;
+            maxValue = max;
             this.type = setType();
         }
 
@@ -61,12 +75,15 @@ public class Day7 extends Day {
                 }
             }
 
-            return TYPE_HAND.getHandTypeFromMap(cards_count);
+            return maxValue ? TYPE_HAND.getMaxHandTypeFromMap(cards_count, separate_cards) : TYPE_HAND.getHandTypeFromMap(cards_count);
         }
 
         @Override
         public int compareTo(Hand o) {
-            if(TYPE_HAND.getValue(this.type) == TYPE_HAND.getValue(o.type)) {
+            int thisValueToConsiderSorting = TYPE_HAND.getValue(this.type);
+            int otherValueToConsiderSorting = TYPE_HAND.getValue(o.type);
+
+            if(thisValueToConsiderSorting == otherValueToConsiderSorting) {
                 String[] thisCards = this.cards.split("");
                 String[] otherCards = o.cards.split("");
 
@@ -84,7 +101,7 @@ public class Day7 extends Day {
                     }
                 }
             } else {
-                if(TYPE_HAND.getValue(this.type) > TYPE_HAND.getValue(o.type)) {
+                if(thisValueToConsiderSorting > otherValueToConsiderSorting) {
                     return 1;
                 } else {
                     return -1;
@@ -131,6 +148,36 @@ public class Day7 extends Day {
                 default -> HIGH_CARD;
             };
         }
+
+        private static TYPE_HAND getMaxHandTypeFromMap(HashMap<String, Integer> cards_count, String[] cards) {
+            if(!cards_count.containsKey("J")) {
+                return getHandTypeFromMap(cards_count);
+            }
+
+            int numberJ = (int) Stream.of(cards).filter(card -> card.equals("J")).count();
+            int maxNumberNonJ = 0;
+            int numberOfPair = 0;
+
+            for(String s: cards_count.keySet()){
+                if(!s.equals("J") && cards_count.get(s) >= maxNumberNonJ) {
+                    maxNumberNonJ = cards_count.get(s);
+                    if(cards_count.get(s) == 2) {
+                        numberOfPair++;
+                    }
+                }
+            }
+
+            return numberOfPair == 2 ? FULL_HOUSE: getHandTypeFromMaxNumberOfCards(maxNumberNonJ + numberJ);
+        }
+
+        private static TYPE_HAND getHandTypeFromMaxNumberOfCards(int number) {
+            return switch(number) {
+                case 5 -> FIVE;
+                case 4 -> FOUR;
+                case 3 -> THREE;
+                default -> ONE_PAIR;
+            };
+        }
     }
 
     private enum TYPE_CARD implements Comparable<TYPE_CARD>{
@@ -159,15 +206,15 @@ public class Day7 extends Day {
                 case A -> 12;
                 case K -> 11;
                 case Q -> 10;
-                case J -> 9;
-                case T -> 8;
-                case C9 -> 7;
-                case C8 -> 6;
-                case C7 -> 5;
-                case C6 -> 4;
-                case C5 -> 3;
-                case C4 -> 2;
-                case C3 -> 1;
+                case T -> 9;
+                case C9 -> 8;
+                case C8 -> 7;
+                case C7 -> 6;
+                case C6 -> 5;
+                case C5 -> 4;
+                case C4 -> 3;
+                case C3 -> 2;
+                case C2 -> 1;
                 default -> 0;
             };
         }
