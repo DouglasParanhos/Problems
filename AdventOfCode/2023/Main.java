@@ -5,10 +5,11 @@ import Days.Day4.Day4;
 import Days.Day5.Day5;
 import Days.Day6.Day6;
 import Days.Day7.Day7;
+import Days.Day8.Day8;
 
 public class Main {
 
     public static void main(String... args) {
-        System.out.println(new Day7().execPart2());
+        System.out.println(new Day8().execPart1());
     }
 }
