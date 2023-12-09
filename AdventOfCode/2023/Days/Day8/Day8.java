@@ -2,8 +2,7 @@ package Days.Day8;
 
 import Days.Day;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Day8 extends Day {
@@ -25,10 +24,10 @@ public class Day8 extends Day {
 
     @Override
     public Number execPart1() {
-        Node iterator = map.get("AAA");
+        Node iterator = map.get("CBA");
         int steps = 0;
-        while(!iterator.key.equals("ZZZ")) {
-            if(path[steps % path.length].equals("L")) {
+        while(!iterator.key.endsWith("Z")) {
+            if(path[steps % path.length].trim().equals("L")) {
                 iterator = map.get(iterator.left);
             } else {
                 iterator = map.get(iterator.right);
@@ -40,7 +39,27 @@ public class Day8 extends Day {
 
     @Override
     public Number execPart2() {
-        return null;
+        List<Node> iteratorNodes = new java.util.ArrayList<>(map.values().stream().filter(node -> node.key.endsWith("A")).toList());
+        ArrayList<Long> numbers = new ArrayList<>();
+
+        for(Node n: iteratorNodes) {
+            int steps = 0;
+            Node node = n;
+            while(!node.key.endsWith("Z")) {
+                if(path[steps % path.length].equals("L")) {
+                    node = map.get(node.left);
+                } else {
+                    node = map.get(node.right);
+                }
+
+                steps++;
+            }
+
+            numbers.add((long) steps);
+        }
+
+
+        return lcm_of_array(numbers);
     }
 
     private static class Node {
@@ -56,7 +75,26 @@ public class Day8 extends Day {
 
         @Override
         public String toString() {
-            return "key: " + key + ", left: " + left + ", right: " + right;
+            return "{key: " + key + ", left: " + left + ", right: " + right +" }";
         }
+    }
+
+    private static long lcm_of_array(ArrayList<Long> arr)
+    {
+        long lcm = arr.get(0);
+        for (int i = 1; i < arr.size(); i++) {
+            long num1 = lcm;
+            long num2 = arr.get(i);
+            long gcd_val = gcd(num1, num2);
+            lcm = (lcm * arr.get(i)) / gcd_val;
+        }
+        return lcm;
+    }
+
+    private static long gcd(long num1, long num2)
+    {
+        if (num2 == 0)
+            return num1;
+        return gcd(num2, num1 % num2);
     }
 }
