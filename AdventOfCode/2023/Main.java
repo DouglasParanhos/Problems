@@ -1,4 +1,5 @@
 import Days.Day1.Day1;
+import Days.Day10.Day10;
 import Days.Day2.Day2;
 import Days.Day3.Day3;
 import Days.Day4.Day4;
@@ -11,6 +12,6 @@ import Days.Day9.Day9;
 public class Main {
 
     public static void main(String... args) {
-        System.out.println(new Day9().execPart2());
+        System.out.println(new Day10().execPart1());
     }
 }
