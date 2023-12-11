@@ -2,6 +2,7 @@ package Days.Day11;
 
 import Days.Day;
 
+import java.math.BigInteger;
 import java.util.*;
 import java.util.List;
 
@@ -56,20 +57,20 @@ public class Day11 extends Day {
             }
         }
 
-        int sum = 0;
+        long sum = 0;
         for(int i = 0; i < galaxies.size() - 1; i++) {
-            sum += calculateAllDistancesGalaxy(galaxies.get(i), galaxies.subList(i + 1, galaxies.size()));
+            sum += calculateAllDistancesGalaxy(galaxies.get(i), galaxies.subList(i + 1, galaxies.size()), 1);
         }
 
         return sum;
     }
 
-    private int calculateAllDistancesGalaxy(Point p, List<Point> galaxies) {
-        int distance = 0;
+    private long calculateAllDistancesGalaxy(Point p, List<Point> galaxies, int valueToMultiply) {
+        long distance = 0;
         for(Point other: galaxies) {
             distance += Math.abs(other.x - p.x) + Math.abs(other.y - p.y);
-            distance += (int) duplicatedRows.stream().filter(row -> row < Math.max(other.x, p.x) && row > Math.min(other.x, p.x)).count();
-            distance += (int) duplicatedColumns.stream().filter(row -> row < Math.max(other.y, p.y) && row > Math.min(other.y, p.y)).count();
+            distance += valueToMultiply * duplicatedRows.stream().filter(row -> row < Math.max(other.x, p.x) && row > Math.min(other.x, p.x)).count();
+            distance += valueToMultiply * duplicatedColumns.stream().filter(row -> row < Math.max(other.y, p.y) && row > Math.min(other.y, p.y)).count();
         }
 
         return distance;
@@ -77,7 +78,22 @@ public class Day11 extends Day {
 
     @Override
     public Number execPart2() {
-        return null;
+        List<Point> galaxies = new ArrayList<>();
+
+        for(int i = 0; i < matrix.length; i++) {
+            for(int j = 0; j < matrix[0].length; j++) {
+                if(matrix[i][j].equals("#")) {
+                    galaxies.add(new Point(i,j));
+                }
+            }
+        }
+
+        BigInteger sum = BigInteger.ZERO;
+        for(int i = 0; i < galaxies.size() - 1; i++) {
+            sum = sum.add(BigInteger.valueOf(calculateAllDistancesGalaxy(galaxies.get(i), galaxies.subList(i + 1, galaxies.size()), 999999)));
+        }
+
+        return sum;
     }
 
     private static class Point {
